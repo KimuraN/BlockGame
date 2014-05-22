@@ -10,6 +10,6 @@ public class Ball {
 	}
 
 	public void paint(Graphics g) {
-
+		g.drawOval(x, y, size, size);
 	}
 }
