@@ -3,7 +3,7 @@ import java.awt.Graphics;
 public class Ball {
 	int x;
 	int y;
-	int size;
+	int size = 16;
 	int vx = 4;
 	int vy = 4;
 

@@ -1,8 +1,12 @@
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JFrame;
 
-public class Game implements Runnable {
+public class Game implements Runnable, MouseMotionListener {
 
 	Ball ball;
+	Bar bar;
 	Thread thread;
 	JFrame frame;
 	GamePanel panel;
@@ -15,11 +19,13 @@ public class Game implements Runnable {
 		game.frame.setSize(640, 480);// フレームのサイズをセット
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// フレーム閉じたらプログラムも終了にセット
 		game.frame.setVisible(true);// フレームが見えるように
+		
+		game.frame.addMouseMotionListener(game);
 
 		game.ball = new Ball();
-		game.ball.size = 16;
+		game.bar = new Bar();
 
-		game.panel = new GamePanel(game.ball);
+		game.panel = new GamePanel(game.ball, game.bar);
 		game.frame.add(game.panel);// フレームにパネルを追加
 
 		game.thread = new Thread(game);
@@ -44,6 +50,16 @@ public class Game implements Runnable {
 
 		}
 
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		bar.move(e.getX());
 	}
 
 }
