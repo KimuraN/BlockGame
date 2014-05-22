@@ -19,7 +19,7 @@ public class Game implements Runnable, MouseMotionListener {
 		game.frame.setSize(640, 480);// フレームのサイズをセット
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// フレーム閉じたらプログラムも終了にセット
 		game.frame.setVisible(true);// フレームが見えるように
-		
+
 		game.frame.addMouseMotionListener(game);
 
 		game.ball = new Ball();
@@ -40,6 +40,7 @@ public class Game implements Runnable, MouseMotionListener {
 
 			ball.move();// ボールのmoveメソッドを呼ぶ
 			panel.repaint();// パネルに描写を行う。詳しい描写の処理はGamePanel内にて
+			atarihantei();
 
 			try {
 				// 繰り返しが速すぎと動きを目で終えないのでここで16ミリ秒眠らせる（ストップ）
@@ -50,6 +51,15 @@ public class Game implements Runnable, MouseMotionListener {
 
 		}
 
+	}
+
+	public void atarihantei() {
+		if (ball.y + ball.size > bar.y) {
+			if (ball.x > bar.centerX - bar.width / 2
+					&& ball.x < bar.centerX + bar.width / 2) {
+				ball.vy *= -1;
+			}
+		}
 	}
 
 	@Override
